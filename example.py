@@ -5,6 +5,7 @@ import sys
 from datetime import datetime
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials as SAC
+import pymongo
 
 #ex.py
 EMULATE_HX711=False
@@ -14,6 +15,12 @@ GDriveJSON = 'key.json'
 GSpreadSheet = 'Python_Android'
 WaitSecond =1
 count = 1
+#db_link--
+
+link_To_db=pymongo.MongoClient("mongodb://admin:123456@203.64.128.65:27017/")
+
+use_db=link_To_db['admin']
+use_col=use_db['Drip_service']
 #--
 
 if not EMULATE_HX711:
@@ -63,7 +70,8 @@ while True:
         time.sleep(0.1)
         #up.py----
         
-
+        use_col.delete_one({})
+        use_col.insert_one({dt:val})
         #dt = datetime.now().strftime('%Y-%m-%dT%H:%M:%S.%f')
         #worksheet.append_row((dt,count))
         worksheet.update_acell('A2',dt)
@@ -94,6 +102,8 @@ while True:
         worksheet.update_acell('A2',dt)
         worksheet.update_acell('B2',val)
         
+        
+
         print("new")
         time.sleep(WaitSecond)
     except Exception as ex:
