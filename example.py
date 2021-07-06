@@ -80,7 +80,7 @@ while True:
 
 
 
-'''
+
 while True:
     try:
         scope = ["https://spreadsheets.google.com/feeds"]
@@ -100,4 +100,4 @@ while True:
         print("can not link google")
         sys.exit()
 
-'''
+
