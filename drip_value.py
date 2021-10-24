@@ -48,16 +48,16 @@ hx.reset()
 
 hx.tare()
 #print("Tare done! Add weight now...")
-try:
+#try:
 #up.py---
-    scope = ["https://spreadsheets.google.com/feeds"]
-    key = SAC.from_json_keyfile_name(GDriveJSON,scope)
-    gc = gspread.authorize(key)
+#    scope = ["https://spreadsheets.google.com/feeds"]
+#    key = SAC.from_json_keyfile_name(GDriveJSON,scope)
+#    gc = gspread.authorize(key)
     #worksheet = gc.open(GSpreadSheet).sheet1
-    worksheet = gc.open_by_key("16tNGUftG-4GqH7POpbudnY49RxU14LC89mtgyN1kwXs").sheet1
-except Exception as ex:
-    print("can not link google")
-    cleanAndExit()
+#    worksheet = gc.open_by_key("16tNGUftG-4GqH7POpbudnY49RxU14LC89mtgyN1kwXs").sheet1
+#except Exception as ex:
+#    print("can not link google")
+#    cleanAndExit()
         
 while True:
     try:
@@ -71,11 +71,11 @@ while True:
         #up.py----
         
         use_col.delete_one({})
-        use_col.insert_one({dt:val})
+        use_col.insert_one({"date":dt,"value":val})
         #dt = datetime.now().strftime('%Y-%m-%dT%H:%M:%S.%f')
         #worksheet.append_row((dt,count))
-        worksheet.update_acell('A2',dt)
-        worksheet.update_acell('B2',val)
+ #       worksheet.update_acell('A2',dt)
+ #       worksheet.update_acell('B2',val)
         print("new: ",val)
         time.sleep(WaitSecond)
         
